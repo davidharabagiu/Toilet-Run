@@ -2,13 +2,15 @@
 
 Window::Window(int Width, int Height, char* Title)
 {
-	if (!glfwInit()) {
+	if (!glfwInit())
+	{
 		std::cerr << "ERROR: could not start GLFW3\n";
 		return;
 	}
 
 	glWindow = glfwCreateWindow(Width, Height, Title, NULL, NULL);
-	if (!glWindow) {
+	if (!glWindow)
+	{
 		std::cerr << "ERROR: could not open window with GLFW3\n";
 		glfwTerminate();
 		return;
