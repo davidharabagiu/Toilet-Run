@@ -1,3 +1,9 @@
+//
+// Window.cpp
+// The window class handles the creation of a open gl window
+// Created by David Harabagiu on 21.12.2017
+//
+
 #include "Window.h"
 
 Window::Window(int Width, int Height, char* Title)

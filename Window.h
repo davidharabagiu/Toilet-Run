@@ -1,6 +1,12 @@
 #pragma once
 
 #include <iostream>
+//
+// Window.h
+// The window class handles the creation of a open gl window
+// Created by David Harabagiu on 21.12.2017
+//
+
 #include "OpenGLInclude.h"
 
 #define DEFAULT_WINDOW_WIDTH 1280
