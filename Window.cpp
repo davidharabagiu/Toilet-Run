@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include "Window.h"
+#include "Input.h"
 
 Window::Window(int Width, int Height, char* Title)
 {
@@ -37,7 +38,20 @@ Window::Window(int Width, int Height, char* Title)
 	std::cout << "Renderer: " << renderer << "\n";
 	std::cout << "OpenGL version supported: " << version << "\n";
 
+	Input::RegisterCallbacks(glWindow);
+
 	glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
 	glViewport(0, 0, Width, Height);
 	glEnable(GL_DEPTH_TEST);
+}
+
+void Window::Update()
+{
+	if (Input::IsKeyPressed(GLFW_KEY_ESCAPE))
+	{
+		glfwSetWindowShouldClose(glWindow, GLFW_TRUE);
+	}
+
+	glfwPollEvents();
+	glfwSwapBuffers(glWindow);
 }

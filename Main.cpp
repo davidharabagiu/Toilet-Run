@@ -1,6 +1,6 @@
 //
 // Main.cpp
-// Main class. Contains the entry point of the application.
+// Main source file. Contains the entry point of the application.
 // Created by David Harabagiu on 21.12.2017
 //
 

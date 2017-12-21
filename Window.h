@@ -29,11 +29,7 @@ public:
 	{
 	}
 
-	void Update()
-	{
-		glfwPollEvents();
-		glfwSwapBuffers(glWindow);
-	}
+	void Update();
 
 	bool ShouldClose()
 	{
