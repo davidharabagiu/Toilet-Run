@@ -8,64 +8,33 @@
 
 #include <iostream>
 #include "OpenGLInclude.h"
-
-#define DEFAULT_WINDOW_WIDTH 1280
-#define DEFAULT_WINDOW_HEIGHT 720
+#include "Window.h"
 
 class Game
 {
+
 public:
-	Game(int WindowWidth, int WindowHeight, char* WindowTitle, GLFWwindowsizefun WindowResizeCallback) : 
-		windowWidth(WindowWidth),
-		windowHeight(WindowHeight),
-		windowTitle(WindowTitle),
-		windowResizeCallback(WindowResizeCallback)
-	{
-		InitGame();
-	}
 
-	Game(char* WindowTitle, GLFWwindowsizefun WindowResizeCallback) :
-		Game(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, WindowTitle, WindowResizeCallback)
+	Game(int WindowWidth, int WindowHeight, char* WindowTitle)
+		: window(WindowWidth, WindowHeight, WindowTitle)
 	{
 	}
 
-	int GetWindowWidth()
+	Game(char* WindowTitle) :
+		Game(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, WindowTitle)
 	{
-		return windowWidth;
 	}
 
-	void SetWindowWidth(int Width)
+	Game() :
+		Game(DEFAULT_WINDOW_TITLE)
 	{
-		windowWidth = Width;
-	}
-
-	int GetWindowHeight()
-	{
-		return windowHeight;
-	}
-
-	void SetWindowHeight(int Height)
-	{
-		windowHeight = Height;
 	}
 
 	void Run();
 
 private:
 
-	void InitGame()
-	{
-		InitWindow();
-		InitOpenGL();
-	}
-
-	void InitWindow();
-	void InitOpenGL();
+	Window window;
 	void RenderScene();
 
-	int windowWidth;
-	int windowHeight;
-	char* windowTitle;
-	GLFWwindow* window;
-	GLFWwindowsizefun windowResizeCallback;
 };
