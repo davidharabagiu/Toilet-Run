@@ -4,7 +4,7 @@
 // Created by David Harabagiu on 14.12.2017
 //
 
-#include "Game.h"
+#include "Game.hpp"
 
 void Game::Run()
 {

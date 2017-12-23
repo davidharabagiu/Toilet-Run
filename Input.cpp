@@ -4,8 +4,7 @@
 // Created by David Harabagiu on 21.12.2017
 //
 
-#include "Input.h"
-#include <map>
+#include "Input.hpp"
 
 namespace Input
 {

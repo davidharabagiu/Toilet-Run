@@ -6,7 +6,9 @@
 
 #pragma once
 
+#include <iostream>
 #include "OpenGLInclude.h"
+#include "Input.hpp"
 
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720

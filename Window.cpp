@@ -4,9 +4,7 @@
 // Created by David Harabagiu on 21.12.2017
 //
 
-#include <iostream>
-#include "Window.h"
-#include "Input.h"
+#include "Window.hpp"
 
 Window::Window(int Width, int Height, char* Title)
 {

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "Window.h"
-#include "Input.h"
+#include "Window.hpp"
+#include "Input.hpp"
 
 class Game
 {

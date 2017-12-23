@@ -4,7 +4,7 @@
 // Created by David Harabagiu on 21.12.2017
 //
 
-#include "Game.h"
+#include "Game.hpp"
 
 Game game("Toilet Run Dev Test");
 

@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <map>
 #include "OpenGLInclude.h"
 
 namespace Input
