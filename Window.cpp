@@ -39,10 +39,13 @@ Window::Window(int Width, int Height, char* Title)
 	std::cout << "OpenGL version supported: " << version << "\n";
 
 	Input::RegisterCallbacks(glWindow);
+	Input::DisableCursor(glWindow);
 
 	glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
 	glViewport(0, 0, Width, Height);
 	glEnable(GL_DEPTH_TEST);
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 void Window::Update()

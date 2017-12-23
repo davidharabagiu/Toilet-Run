@@ -15,4 +15,6 @@ namespace Input
 	double GetCursorX();
 	double GetCursorY();
 	void RegisterCallbacks(GLFWwindow* Window);
+	void DisableCursor(GLFWwindow* Window);
+	void EnableCursor(GLFWwindow* Window);
 }

@@ -6,9 +6,8 @@
 
 #pragma once
 
-#include <iostream>
-#include "OpenGLInclude.h"
 #include "Window.h"
+#include "Input.h"
 
 class Game
 {
@@ -18,7 +17,6 @@ public:
 	Game(int WindowWidth, int WindowHeight, char* WindowTitle)
 		: window(WindowWidth, WindowHeight, WindowTitle)
 	{
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	}
 
 	Game(char* WindowTitle) :

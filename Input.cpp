@@ -80,5 +80,16 @@ namespace Input
 		glfwSetCursorPosCallback(Window, CursorPositionCallback);
 		glfwSetMouseButtonCallback(Window, MouseButtonCallback);
 	}
+
+	void DisableCursor(GLFWwindow* Window)
+	{
+		glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
+
+	void EnableCursor(GLFWwindow* Window)
+	{
+		glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+
 }
 
