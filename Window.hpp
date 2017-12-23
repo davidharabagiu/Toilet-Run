@@ -35,7 +35,7 @@ public:
 
 	bool ShouldClose()
 	{
-		return glfwWindowShouldClose(glWindow);
+		return glfwWindowShouldClose(glWindow) == GL_TRUE;
 	}
 
 private:
