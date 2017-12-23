@@ -8,6 +8,7 @@
 
 #include "Window.hpp"
 #include "Input.hpp"
+#include "Shader.hpp"
 
 class Game
 {
@@ -15,7 +16,9 @@ class Game
 public:
 
 	Game(int WindowWidth, int WindowHeight, char* WindowTitle)
-		: window(WindowWidth, WindowHeight, WindowTitle)
+		:
+		window(WindowWidth, WindowHeight, WindowTitle),
+		shader("shaders/shader.vert", "shaders/shader.frag")
 	{
 	}
 
@@ -34,6 +37,7 @@ public:
 private:
 
 	Window window;
+	Shader shader;
 	void RenderScene();
 
 };

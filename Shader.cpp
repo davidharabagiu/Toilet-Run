@@ -7,15 +7,17 @@
 
 Shader::Shader(std::string VertexShaderFileName, std::string FragmentShaderFileName)
 {
-	const GLchar* vertexShaderString = ReadShaderFile(VertexShaderFileName).c_str();
+	std::string vertexShaderString = ReadShaderFile(VertexShaderFileName);
+	const GLchar* vertexShaderPString = vertexShaderString.c_str();
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderString, NULL);
+	glShaderSource(vertexShader, 1, &vertexShaderPString, NULL);
 	glCompileShader(vertexShader);
 	ShaderCompileLog(vertexShader);
 
-	const GLchar* fragmentShaderString = ReadShaderFile(FragmentShaderFileName).c_str();
+	std::string fragmentShaderString = ReadShaderFile(FragmentShaderFileName);
+	const GLchar* fragmentShaderPString = fragmentShaderString.c_str();
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderString, NULL);
+	glShaderSource(fragmentShader, 1, &fragmentShaderPString, NULL);
 	glCompileShader(fragmentShader);
 	ShaderCompileLog(fragmentShader);
 
