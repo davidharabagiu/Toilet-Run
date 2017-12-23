@@ -6,8 +6,7 @@
 //  Copyright © 2016 CGIS. All rights reserved.
 //
 
-#ifndef Model3D_hpp
-#define Model3D_hpp
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -15,7 +14,6 @@
 
 #include "Mesh.hpp"
 
-#define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 #include "stb_image.h"
 
@@ -49,5 +47,3 @@ namespace gps {
 		GLuint ReadTextureFromFile(const char* file_name);
     };
 }
-
-#endif /* Model3D_hpp */
