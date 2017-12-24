@@ -42,8 +42,15 @@ Window::Window(int Width, int Height, char* Title)
 	glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
 	glViewport(0, 0, Width, Height);
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
+	glEnable(GL_CULL_FACE); // cull face
+	glCullFace(GL_BACK); // cull back face
+	glFrontFace(GL_CCW); // GL_CCW for counter clock-wise
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+
+	this->width = Width;
+	this->height = Height;
 }
 
 void Window::Update()

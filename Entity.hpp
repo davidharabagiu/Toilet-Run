@@ -45,7 +45,7 @@ public:
 	
 private:
 
-	gps::Model3D& model;
+	gps::Model3D model;
 	Shader& shader;
 	glm::mat4 modelTransform;
 	glm::mat4 translationMatrix;
@@ -56,9 +56,6 @@ private:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
-	void Entity::UpdateTransformMatrix()
-	{
-		modelTransform = translationMatrix * rotationMatrix * scaleMatrix;
-	}
+	void UpdateTransformMatrix();
 
 };

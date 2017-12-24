@@ -38,8 +38,20 @@ public:
 		return glfwWindowShouldClose(glWindow) == GL_TRUE;
 	}
 
+	int Width()
+	{
+		return width;
+	}
+
+	int Height()
+	{
+		return height;
+	}
+
 private:
 
 	GLFWwindow* glWindow;
+	int width;
+	int height;
 
 };
