@@ -23,7 +23,7 @@ void Game::RenderScene()
 {
 	for (Entity& e : entities)
 	{
-		e.Draw();
+		e.Draw(graphics);
 	}
 }
 
@@ -34,10 +34,5 @@ void Game::UpdateEntities()
 		e.Update();
 	}
 
-	camera.update();
-
-	//glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
-	glm::mat4 view = camera.getViewMatrix();
-	glUniformMatrix4fv(viewMatrixLoc, 1, GL_FALSE, glm::value_ptr(view));
+	player.Update();
 }

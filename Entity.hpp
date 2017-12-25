@@ -7,22 +7,22 @@
 #pragma once
 
 #include "Model3D.hpp"
-#include "Shader.hpp"
-#include "glm/glm/gtc/matrix_transform.hpp"
-#include "glm/glm/gtc/type_ptr.hpp"
+#include "Graphics.hpp"
+
+class Graphics;
 
 class Entity
 {
 
 public:
 	
-	Entity(gps::Model3D& model, Shader& shader);
+	Entity(gps::Model3D& model);
 
 	virtual void Update()
 	{
 	}
 
-	void Draw();
+	void Draw(Graphics& g);
 
 	glm::vec3 Position()
 	{
@@ -46,16 +46,8 @@ public:
 private:
 
 	gps::Model3D model;
-	Shader& shader;
-	glm::mat4 modelTransform;
-	glm::mat4 translationMatrix;
-	glm::mat4 rotationMatrix;
-	glm::mat4 scaleMatrix;
-	GLuint modelTransformLoc;
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
-
-	void UpdateTransformMatrix();
 
 };

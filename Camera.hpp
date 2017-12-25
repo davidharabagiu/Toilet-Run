@@ -16,13 +16,12 @@
 #include "glm/glm.hpp"
 #include "glm/gtx/transform.hpp"
 
-#define MAX_X_ROTATION 1.57
-#define MIN_X_ROTATION -1.57
-#define SPEED 0.001f
+#define MAX_X_ROTATION 1.3
+#define MIN_X_ROTATION -1.3
 
 namespace gps {
     
-    enum MOVE_DIRECTION {MOVE_FORWARD, MOVE_BACKWARD, MOVE_RIGHT, MOVE_LEFT};
+    
     
     class Camera
     {
@@ -33,23 +32,15 @@ namespace gps {
 		Camera(glm::vec3 cameraPosition, float xRotation, float yRotation);
         //return the view matrix, using glm::lookAt
         glm::mat4 getViewMatrix();
-        //update the camera parameters
-        void move(MOVE_DIRECTION direction, float speed);
-        //yaw - rotate around y axis
-        //pitch - rotate around x axis
-        void rotate(float pitch, float yaw);
-		void update();
+		void SetPosition(glm::vec3 position);
+		void SetRotation(GLfloat xRotation, GLfloat yRotation);
         
     private:
 		void updateCameraTarget();
-		float xRotation = 0;
-		float yRotation = 0;
         glm::vec3 cameraPosition;
         glm::vec3 cameraTarget;
-		bool movingForward;
-		bool movingBackward;
-		bool movingLeft;
-		bool movingRight;
+		GLfloat xRotation;
+		GLfloat yRotation;
 		GLuint viewMatrixLoc;
     };
     
