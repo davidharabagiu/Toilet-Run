@@ -3,9 +3,12 @@
 Player::Player(Graphics& graphics)
 	: graphics {graphics}
 {
-	this->position = glm::vec3(0, 0, 0);
+	this->position = glm::vec3(0, 4.0f, 0);
 	this->rotationX = 0;
 	this->rotationY = 0;
+
+	graphics.SetCameraPosition(position);
+	graphics.SetCameraRotation(rotationX, rotationY);
 }
 
 void Player::Update()
@@ -87,7 +90,10 @@ void Player::Move(MOVE_DIRECTION direction, float speed)
 		position.x -= glm::cos(rotationY) * speed;
 	}
 
-	graphics.SetCameraPosition(position);
+	distanceWalked += speed;
+	GLfloat bobbingDeltaY = glm::sin(distanceWalked * 7.5f) / 10.0f;
+
+	graphics.SetCameraPosition(position + glm::vec3(0.0f, bobbingDeltaY, 0.0f));
 }
 
 void Player::Rotate(float pitch, float yaw)

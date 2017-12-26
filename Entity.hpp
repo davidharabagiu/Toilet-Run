@@ -45,7 +45,7 @@ public:
 	
 private:
 
-	gps::Model3D model;
+	gps::Model3D& model;
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;

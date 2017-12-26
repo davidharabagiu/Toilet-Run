@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Graphics.hpp"
-#define SPEED 0.005f
+#define SPEED 0.05f
 
 class Player
 {
@@ -18,6 +18,7 @@ private:
 	glm::vec3 position;
 	GLfloat rotationX;
 	GLfloat rotationY;
+	GLfloat distanceWalked;
 	void Move(MOVE_DIRECTION direction, float speed);
 	void Rotate(float pitch, float yaw);
 

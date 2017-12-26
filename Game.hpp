@@ -11,6 +11,8 @@
 #include "Entity.hpp"
 #include "Player.hpp"
 #include <vector>
+#include <map>
+#include <string>
 
 class Game
 {
@@ -23,8 +25,14 @@ public:
 		graphics(WindowWidth, WindowHeight),
 		player(graphics)
 	{
-		AddEntity(Entity(gps::Model3D("Objects/nanosuit/nanosuit.obj", "Objects/nanosuit/")));
-		AddEntity(Entity(gps::Model3D("Objects/Farmhouse.obj", "Objects/")));
+		models["floor"] = gps::Model3D("Objects/floor/floor.obj", "Objects/floor/");
+		models["wall"] = gps::Model3D("Objects/wall/wall.obj", "Objects/wall/");
+		models["toilet"] = gps::Model3D("Objects/toilet/toilet.obj", "Objects/toilet/");
+
+		for (int i = 0; i < 10; ++i)
+		{
+			CreateRoom(glm::vec3(0.0f, 0.0f, 30.0f * i));
+		}
 	}
 
 	Game(char* WindowTitle) :
@@ -44,11 +52,14 @@ public:
 		entities.push_back(e);
 	}
 
+	void CreateRoom(glm::vec3 pos);
+
 private:
 
 	Window window;
 	Graphics graphics;
 	std::vector<Entity> entities;
+	std::map<std::string, gps::Model3D> models;
 	Player player;
 
 	void UpdateEntities();

@@ -1,0 +1,25 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl board_plastic
+Ns 49.019608
+Ka 0.913726 0.913726 0.913726
+Kd 0.913726 0.913726 0.913726
+Ks 0.900000 0.900000 0.900000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl toilet_ceramics
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Map__3_Falloff.png
+map_Ka Map__3_Falloff.png
+refl Map__4_Falloff.png
