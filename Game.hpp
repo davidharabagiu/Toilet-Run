@@ -25,9 +25,9 @@ public:
 		graphics(WindowWidth, WindowHeight),
 		player(graphics)
 	{
-		models["floor"] = gps::Model3D("Objects/floor/floor.obj", "Objects/floor/");
-		models["wall"] = gps::Model3D("Objects/wall/wall.obj", "Objects/wall/");
-		models["toilet"] = gps::Model3D("Objects/toilet/toilet.obj", "Objects/toilet/");
+		models["floor"] = gps::Model3D("Objects/floor/floor.obj1", "Objects/floor/");
+		models["wall"] = gps::Model3D("Objects/wall/wall.obj1", "Objects/wall/");
+		models["toilet"] = gps::Model3D("Objects/toilet/toilet.obj1", "Objects/toilet/");
 
 		for (int i = 0; i < 10; ++i)
 		{
