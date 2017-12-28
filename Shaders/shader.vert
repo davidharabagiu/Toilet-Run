@@ -4,14 +4,18 @@ layout(location=0) in vec3 vertexPosition;
 layout(location=1) in vec3 vertexNormal;
 layout(location=2) in vec2 textureCoords;
 
-out vec2 passTexture;
-
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+out vec2 passTexture;
+out vec3 normal;
+out vec4 fragPosEye;
+
 void main() 
 {
+	fragPosEye = view * model * vec4(vertexPosition, 1.0f);
 	passTexture = textureCoords;
-	gl_Position = projection * view * model * vec4(vertexPosition, 1.0f);
+	normal = vertexNormal;
+	gl_Position = projection * fragPosEye;
 }
