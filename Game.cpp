@@ -42,6 +42,11 @@ void Game::UpdateEntities()
 	player.Update(deltaTime);
 }
 
+static double drand48()
+{
+	return rand() / (RAND_MAX + 1.0);
+}
+
 void Game::CreateRoom(glm::vec3 pos)
 {
 	Entity floor(models["floor"]);
@@ -114,9 +119,14 @@ void Game::CreateRoom(glm::vec3 pos)
 	roof.SetPosition(glm::vec3(0.0f, 10.0f, 0.0f) + pos);
 	AddEntity(roof);
 
-	Entity toilet(models["toilet"]);
-	toilet.SetScale(glm::vec3(0.005f, 0.005f, 0.005f));
-	toilet.SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	toilet.SetPosition(pos);
-	AddEntity(toilet);
+	int numberOfToilets = rand() % 5 + 1;
+
+	for (int i = 0; i < numberOfToilets; ++i)
+	{
+		Entity toilet(models["toilet"]);
+		toilet.SetScale(glm::vec3(0.005f, 0.005f, 0.005f));
+		toilet.SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
+		toilet.SetPosition(glm::vec3((drand48() - 0.5) * 25, 0, (drand48() - 0.5) * 25) + pos);
+		AddEntity(toilet);
+	}
 }

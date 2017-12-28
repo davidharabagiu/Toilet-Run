@@ -13,6 +13,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <cstdlib>
 
 class Game
 {
@@ -29,9 +30,12 @@ public:
 		models["wall"] = gps::Model3D("Objects/wall/wall.obj1", "Objects/wall/");
 		models["toilet"] = gps::Model3D("Objects/toilet/toilet.obj1", "Objects/toilet/");
 
-		for (int i = 0; i < 10; ++i)
+		for (int i = 0; i < 3; ++i)
 		{
-			CreateRoom(glm::vec3(0.0f, 0.0f, 30.0f * i));
+			for (int j = 0; j < 3; ++j)
+			{
+				CreateRoom(glm::vec3(30.0f * i, 0.0f, 30.0f * j));
+			}
 		}
 	}
 

@@ -5,11 +5,13 @@
 //
 
 #include "Game.hpp"
+#include <ctime>
 
 Game game("Toilet Run Dev Test");
 
 int main(int argc, char **argv)
 {
+	srand(time(NULL));
 	game.Run();
 	return 0;
 }
