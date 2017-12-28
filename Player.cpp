@@ -11,7 +11,7 @@ Player::Player(Graphics& graphics)
 	graphics.SetCameraRotation(rotationX, rotationY);
 }
 
-void Player::Update()
+void Player::Update(double deltaTime)
 {
 	bool movingForward = false;
 	bool movingBackward = false;
@@ -37,19 +37,19 @@ void Player::Update()
 
 	if (movingForward)
 	{
-		Move(MOVE_FORWARD, SPEED);
+		Move(MOVE_FORWARD, SPEED * deltaTime);
 	}
 	if (movingBackward)
 	{
-		Move(MOVE_BACKWARD, SPEED);
+		Move(MOVE_BACKWARD, SPEED * deltaTime);
 	}
 	if (movingLeft)
 	{
-		Move(MOVE_LEFT, SPEED);
+		Move(MOVE_LEFT, SPEED * deltaTime);
 	}
 	if (movingRight)
 	{
-		Move(MOVE_RIGHT, SPEED);
+		Move(MOVE_RIGHT, SPEED * deltaTime);
 	}
 
 	static double lastxpos = -1;
@@ -91,7 +91,7 @@ void Player::Move(MOVE_DIRECTION direction, float speed)
 	}
 
 	distanceWalked += speed;
-	GLfloat bobbingDeltaY = glm::sin(distanceWalked * 7.5f) / 10.0f;
+	GLfloat bobbingDeltaY = glm::sin(distanceWalked * 1.5f) / 10.0f;
 
 	graphics.SetCameraPosition(position + glm::vec3(0.0f, bobbingDeltaY, 0.0f));
 }

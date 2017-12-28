@@ -29,12 +29,17 @@ void Game::RenderScene()
 
 void Game::UpdateEntities()
 {
+	static double lastTimeStamp = 0;
+	double currentTimeStamp = glfwGetTime();
+	double deltaTime = currentTimeStamp - lastTimeStamp;
+	lastTimeStamp = currentTimeStamp;
+
 	for (Entity& e : entities)
 	{
 		e.Update();
 	}
 
-	player.Update();
+	player.Update(deltaTime);
 }
 
 void Game::CreateRoom(glm::vec3 pos)
@@ -110,7 +115,7 @@ void Game::CreateRoom(glm::vec3 pos)
 	AddEntity(roof);
 
 	Entity toilet(models["toilet"]);
-	toilet.SetScale(glm::vec3(0.01f, 0.01f, 0.01f));
+	toilet.SetScale(glm::vec3(0.005f, 0.005f, 0.005f));
 	toilet.SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
 	toilet.SetPosition(pos);
 	AddEntity(toilet);

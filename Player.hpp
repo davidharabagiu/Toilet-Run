@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Graphics.hpp"
-#define SPEED 0.05f
+#define SPEED 35.0f
 
 class Player
 {
@@ -10,7 +10,7 @@ class Player
 public:
 
 	Player(Graphics& graphics);
-	void Update();
+	void Update(double deltaTime);
 
 private:
 
