@@ -1,5 +1,5 @@
 #version 410 core
-#define MAX_POINT_LIGHTS 10
+#define MAX_POINT_LIGHTS 5
 
 struct PointLight
 {
@@ -10,8 +10,10 @@ struct PointLight
 in vec2 passTexture;
 in vec3 normal;
 in vec4 fragPosEye;
+in vec4 fragPosLightSpaces[MAX_POINT_LIGHTS];
 
 uniform sampler2D diffuseTexture;
+uniform sampler2D shadowMaps[MAX_POINT_LIGHTS];
 uniform mat3 normalMatrix;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform int nrPointLights;
@@ -19,14 +21,25 @@ uniform mat4 view;
 
 out vec4 fragmentColor;
 
-float ambientStrength = 4.0f;
-float specularStrength = 0.5f;
-float shininess = 32.0f;
+float ambientStrength = 0.4f;
+float specularStrength = 0.01f;
+float shininess = 0.5f;
 float constant = 1.0f;
 float linear = 0.00225f;
 float quadratic = 0.00375f;
 
-vec3 CalcPointLight(vec4 lightPosEye, vec3 color)
+float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap)
+{
+	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+	projCoords = projCoords * 0.5f + 0.5f;
+	float closestDepth = texture(shadowMap, projCoords.xy).r;
+	float currentDepth = projCoords.z;
+	float shadow = (currentDepth - 0.005) > closestDepth ? 1.0f : 0.0f;
+
+	return shadow;
+}
+
+vec3 CalcPointLight(vec4 lightPosEye, vec4 fragPosLightSpace, sampler2D shadowMap, vec3 color)
 {
 	vec3 cameraPosEye = vec3(0.0f);
 	vec3 normalEye = normalize(normalMatrix * normal);
@@ -42,7 +55,9 @@ vec3 CalcPointLight(vec4 lightPosEye, vec3 color)
 	float distance = length(lightPosEye.xyz - fragPosEye.xyz);
 	float att = 1.0f / (constant + linear * distance + quadratic * distance * distance);
 
-	return (ambient + diffuse + specular) * att;
+	float shadow = ShadowCalculation(fragPosLightSpace, shadowMap);
+
+	return (ambient + (1.0 - shadow) * (diffuse + specular)) * att;
 }
 
 void main() 
@@ -53,8 +68,8 @@ void main()
 	for (int i = 0; i < nrPointLights; i++)
 	{
 		vec4 lightPosEye = view * vec4(pointLights[i].position, 1.0f);
-		totalLight += CalcPointLight(lightPosEye, pointLights[i].color);
+		totalLight += CalcPointLight(lightPosEye, fragPosLightSpaces[i], shadowMaps[i], pointLights[i].color);
 	}
 
-    fragmentColor = min(diffuseTexture * vec4(totalLight, 1.0f), 1.0f);
+    fragmentColor = min(diffuseColor * vec4(totalLight, 1.0f), 1.0f);
 }

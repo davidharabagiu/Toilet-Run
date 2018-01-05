@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Graphics.hpp"
+#include "OpenGLInclude.h"
 #define SPEED 35.0f
+
+class Graphics;
 
 class Player
 {

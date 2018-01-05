@@ -7,7 +7,6 @@
 #pragma once
 
 #include "Model3D.hpp"
-#include "Graphics.hpp"
 
 class Graphics;
 

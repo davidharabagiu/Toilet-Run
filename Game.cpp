@@ -11,9 +11,9 @@ void Game::Run()
 	while (!window.ShouldClose())
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glViewport(0, 0, this->window.Width(), this->window.Height());
-
 		UpdateEntities();
+		graphics.RenderShadows(entities);
+		glViewport(0, 0, this->window.Width(), this->window.Height());
 		RenderScene();
 		window.Update();
 	}
@@ -21,6 +21,8 @@ void Game::Run()
 
 void Game::RenderScene()
 {
+	graphics.UseNormalShader();
+
 	for (Entity& e : entities)
 	{
 		e.Draw(graphics);
@@ -125,8 +127,10 @@ void Game::CreateRoom(glm::vec3 pos)
 	{
 		Entity toilet(models["toilet"]);
 		toilet.SetScale(glm::vec3(0.005f, 0.005f, 0.005f));
-		toilet.SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
+		toilet.SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 3.14f * drand48()));
 		toilet.SetPosition(glm::vec3((drand48() - 0.5) * 25, 0, (drand48() - 0.5) * 25) + pos);
 		AddEntity(toilet);
 	}
+
+	graphics.AddLightSource(glm::vec3((drand48() - 0.5) * 25, 1.0f, (drand48() - 0.5) * 25) + pos, glm::vec3(drand48(), drand48(), drand48()));
 }

@@ -6,6 +6,7 @@
 //
 
 #include "Camera.hpp"
+#include "Input.hpp"
 
 namespace gps
 {
@@ -57,5 +58,10 @@ namespace gps
 		this->xRotation = newXRotation;
 		this->yRotation = newYRotation;
 		updateCameraTarget();
+	}
+
+	glm::vec3 Camera::Target()
+	{
+		return cameraTarget;
 	}
 }

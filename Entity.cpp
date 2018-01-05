@@ -5,6 +5,7 @@
 //
 
 #include "Entity.hpp"
+#include "Graphics.hpp"
 
 Entity::Entity(gps::Model3D& model)
 	: model {model}

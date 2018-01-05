@@ -12,9 +12,9 @@
 #define Camera_hpp
 
 #include <iostream>
-#include "Input.hpp"
-#include "glm/glm.hpp"
-#include "glm/gtx/transform.hpp"
+#include "OpenGLInclude.h"
+#include "glm/glm/glm.hpp"
+#include "glm/glm/gtx/transform.hpp"
 
 #define MAX_X_ROTATION 1.3
 #define MIN_X_ROTATION -1.3
@@ -34,6 +34,7 @@ namespace gps {
         glm::mat4 getViewMatrix();
 		void SetPosition(glm::vec3 position);
 		void SetRotation(GLfloat xRotation, GLfloat yRotation);
+		glm::vec3 Target();
         
     private:
 		void updateCameraTarget();

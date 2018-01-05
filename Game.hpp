@@ -7,9 +7,9 @@
 #pragma once
 
 #include "Window.hpp"
-#include "Input.hpp"
 #include "Entity.hpp"
 #include "Player.hpp"
+#include "Graphics.hpp"
 #include <vector>
 #include <map>
 #include <string>
@@ -30,9 +30,9 @@ public:
 		models["wall"] = gps::Model3D("Objects/wall/wall.obj1", "Objects/wall/");
 		models["toilet"] = gps::Model3D("Objects/toilet/toilet.obj1", "Objects/toilet/");
 
-		for (int i = 0; i < 3; ++i)
+		for (int i = 0; i < 2; ++i)
 		{
-			for (int j = 0; j < 3; ++j)
+			for (int j = 0; j < 2; ++j)
 			{
 				CreateRoom(glm::vec3(30.0f * i, 0.0f, 30.0f * j));
 			}

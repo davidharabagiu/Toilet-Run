@@ -1,4 +1,6 @@
 #include "Player.hpp"
+#include "Input.hpp"
+#include "Graphics.hpp"
 
 Player::Player(Graphics& graphics)
 	: graphics {graphics}
