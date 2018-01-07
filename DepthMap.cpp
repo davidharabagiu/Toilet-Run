@@ -3,7 +3,7 @@
 #include "Entity.hpp"
 
 DepthMap::DepthMap(GLint index, Shader& shader, Shader& depthShader, glm::vec3 lightPosition)
-	: depthShader(depthShader), lightPosition(lightPosition)
+	: depthShader(depthShader), lightPosition(lightPosition), index(index)
 {
 	glGenFramebuffers(1, &fbo);
 	glGenTextures(1, &texture);
@@ -21,6 +21,8 @@ DepthMap::DepthMap(GLint index, Shader& shader, Shader& depthShader, glm::vec3 l
 
 	lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 7.5f);
 	lightSpaceMatrixLoc = glGetUniformLocation(depthShader.GetShaderProgram(), "lightSpaceMatrix");
+	
+	modelLoc = glGetUniformLocation(depthShader.GetShaderProgram(), "model");
 
 	std::string lightSpaceMatrixUniformName = "lightSpaceMatrices[";
 	std::string shadowMapUniformName = "shadowMaps[";
@@ -29,12 +31,12 @@ DepthMap::DepthMap(GLint index, Shader& shader, Shader& depthShader, glm::vec3 l
 
 	lightSpaceMatrixLoc2 = glGetUniformLocation(shader.GetShaderProgram(), lightSpaceMatrixUniformName.c_str());
 	shadowMapLoc = glGetUniformLocation(shader.GetShaderProgram(), shadowMapUniformName.c_str());
-	samplerId = GL_TEXTURE1 + index;
+	samplerId = GL_TEXTURE3 + index;
 }
 
 void DepthMap::Render(glm::vec3 cameraTarget, std::vector<Entity>& entities, Graphics& graphics)
 {
-	glm::mat4 lightView = glm::lookAt(lightPosition, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 lightView = glm::lookAt(lightPosition, cameraTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 	depthShader.UseShaderProgram();
 
@@ -45,7 +47,8 @@ void DepthMap::Render(glm::vec3 cameraTarget, std::vector<Entity>& entities, Gra
 
 	for (Entity e : entities)
 	{
-		e.Draw(graphics);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(e.ModelMatrix()));
+		e.Draw(depthShader);
 	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -55,5 +58,7 @@ void DepthMap::Render(glm::vec3 cameraTarget, std::vector<Entity>& entities, Gra
 
 	glActiveTexture(samplerId);
 	glBindTexture(GL_TEXTURE_2D, texture);
+	glUniform1i(shadowMapLoc, index + 3);
+
 	//glBindTexture(GL_TEXTURE)
 }

@@ -20,16 +20,18 @@ public:
 
 private:
 
-	const GLuint SHADOW_WIDTH = 128;
-	const GLuint SHADOW_HEIGHT = 128;
+	const GLuint SHADOW_WIDTH = 1024;
+	const GLuint SHADOW_HEIGHT = 1024;
 	GLuint fbo;
 	GLuint texture;
 	glm::mat4 lightProjection;
 	glm::vec3 lightPosition;
 	Shader& depthShader;
+	GLuint modelLoc;
 	GLuint lightSpaceMatrixLoc;
 	GLuint lightSpaceMatrixLoc2;
 	GLuint shadowMapLoc;
 	GLenum samplerId;
+	int index;
 
 };

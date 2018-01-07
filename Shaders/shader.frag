@@ -31,10 +31,14 @@ float quadratic = 0.00375f;
 float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap)
 {
 	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+	//if (projCoords.z > 1.0f)
+	//{
+		//return 0.0f;
+	//}
 	projCoords = projCoords * 0.5f + 0.5f;
 	float closestDepth = texture(shadowMap, projCoords.xy).r;
 	float currentDepth = projCoords.z;
-	float shadow = (currentDepth - 0.005) > closestDepth ? 1.0f : 0.0f;
+	float shadow = (currentDepth - 0.01f) > closestDepth ? 1.0f : 0.0f;
 
 	return shadow;
 }

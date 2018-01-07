@@ -22,6 +22,7 @@ public:
 	}
 
 	void Draw(Graphics& g);
+	void Draw(Shader& s);
 
 	glm::vec3 Position()
 	{
@@ -38,6 +39,7 @@ public:
 		return scale;
 	}
 
+	glm::mat4 ModelMatrix();
 	void SetPosition(glm::vec3& NewPosition);
 	void SetRotation(glm::vec3& NewRotation);
 	void SetScale(glm::vec3& NewScale);

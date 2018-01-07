@@ -20,6 +20,11 @@ void Entity::Draw(Graphics& g)
 	g.Draw(model, position, rotation, scale);
 }
 
+void Entity::Draw(Shader& s)
+{
+	model.Draw(s);
+}
+
 void Entity::SetPosition(glm::vec3& NewPosition)
 {
 	position = NewPosition;
@@ -33,4 +38,15 @@ void Entity::SetRotation(glm::vec3& NewRotation)
 void Entity::SetScale(glm::vec3& NewScale)
 {
 	scale = NewScale;
+}
+
+glm::mat4 Entity::ModelMatrix()
+{
+	glm::mat4 tr = glm::mat4(1.0f);
+	tr = glm::translate(tr, position);
+	tr = glm::rotate(tr, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+	tr = glm::rotate(tr, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+	tr = glm::rotate(tr, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+	tr = glm::scale(tr, scale);
+	return tr;
 }
