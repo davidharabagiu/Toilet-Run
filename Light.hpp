@@ -14,6 +14,7 @@ class Graphics;
 struct PointLight
 {
 	glm::vec3 Position;
+	glm::vec3 Target;
 	glm::vec3 Color;
 	DepthMap ShadowMap;
 };
@@ -24,9 +25,9 @@ class Light
 public:
 
 	Light(Shader& shader, Shader& depthShader);
-	void AddLightSource(glm::vec3 lightPosition, glm::vec3 lightColor);
+	void AddLightSource(glm::vec3 lightPosition, glm::vec3 lightTarget, glm::vec3 lightColor);
 	void SendToShader();
-	void RenderDepthMaps(glm::vec3 cameraTarget, std::vector<Entity>& entities, Graphics& graphics);
+	void RenderDepthMaps(std::vector<Entity>& entities, Graphics& graphics);
 
 private:
 

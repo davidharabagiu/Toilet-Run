@@ -28,17 +28,25 @@ float constant = 1.0f;
 float linear = 0.00225f;
 float quadratic = 0.00375f;
 
+float LinearizeDepth(float depth)
+{
+	float near_plane = 2.0f;
+	float far_plane = 50.0f;
+    float z = depth * 2.0 - 1.0; // Back to NDC 
+    return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));
+}
+
 float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap)
 {
 	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-	//if (projCoords.z > 1.0f)
-	//{
-		//return 0.0f;
-	//}
+	if (projCoords.z > 1.0f)
+	{
+		return 0.0f;
+	}
 	projCoords = projCoords * 0.5f + 0.5f;
-	float closestDepth = texture(shadowMap, projCoords.xy).r;
+	float closestDepth = LinearizeDepth(texture(shadowMap, projCoords.xy).r) / 50.0f;
 	float currentDepth = projCoords.z;
-	float shadow = (currentDepth - 0.01f) > closestDepth ? 1.0f : 0.0f;
+	float shadow = (currentDepth - 0.05f) > closestDepth ? 1.0f : 0.0f;
 
 	return shadow;
 }

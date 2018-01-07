@@ -46,9 +46,9 @@ void Graphics::Draw(gps::Model3D model, glm::vec3 position, glm::vec3 rotation, 
 	model.Draw(shader);
 }
 
-void Graphics::AddLightSource(glm::vec3 position, glm::vec3 color)
+void Graphics::AddLightSource(glm::vec3 position, glm::vec3 target, glm::vec3 color)
 {
-	light.AddLightSource(position, color);
+	light.AddLightSource(position, target, color);
 	light.SendToShader();
 }
 
@@ -64,5 +64,5 @@ void Graphics::UseDepthShader()
 
 void Graphics::RenderShadows(std::vector<Entity>& entities)
 {
-	light.RenderDepthMaps(camera.Target(), entities, *this);
+	light.RenderDepthMaps(entities, *this);
 }

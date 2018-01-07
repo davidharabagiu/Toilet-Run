@@ -16,7 +16,7 @@ class DepthMap
 public:
 
 	DepthMap(GLint index, Shader& shader, Shader& depthShader, glm::vec3 lightPosition);
-	void Render(glm::vec3 cameraTarget, std::vector<Entity>& entities, Graphics& graphics);
+	void Render(glm::vec3 lightTarget, std::vector<Entity>& entities, Graphics& graphics);
 
 private:
 

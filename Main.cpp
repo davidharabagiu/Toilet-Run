@@ -7,11 +7,10 @@
 #include "Game.hpp"
 #include <ctime>
 
-Game game("Toilet Run Dev Test");
-
 int main(int argc, char **argv)
 {
 	srand(time(NULL));
+	Game game("Toilet Run Dev Test");
 	game.Run();
 	return 0;
 }

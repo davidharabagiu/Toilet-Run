@@ -19,7 +19,8 @@ DepthMap::DepthMap(GLint index, Shader& shader, Shader& depthShader, glm::vec3 l
 	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 7.5f);
+	lightProjection = glm::perspective(glm::radians(45.0f), 1.0f, 2.0f, 50.f);
+	//lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 14.f, -14.f);
 	lightSpaceMatrixLoc = glGetUniformLocation(depthShader.GetShaderProgram(), "lightSpaceMatrix");
 	
 	modelLoc = glGetUniformLocation(depthShader.GetShaderProgram(), "model");
@@ -34,9 +35,9 @@ DepthMap::DepthMap(GLint index, Shader& shader, Shader& depthShader, glm::vec3 l
 	samplerId = GL_TEXTURE3 + index;
 }
 
-void DepthMap::Render(glm::vec3 cameraTarget, std::vector<Entity>& entities, Graphics& graphics)
+void DepthMap::Render(glm::vec3 lightTarget, std::vector<Entity>& entities, Graphics& graphics)
 {
-	glm::mat4 lightView = glm::lookAt(lightPosition, cameraTarget, glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 lightView = glm::lookAt(lightPosition, lightTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 	depthShader.UseShaderProgram();
 

@@ -20,7 +20,7 @@ public:
 	void Draw(gps::Model3D model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 	void SetCameraPosition(glm::vec3 position);
 	void SetCameraRotation(GLfloat xRotation, GLfloat yRotation);
-	void AddLightSource(glm::vec3 position, glm::vec3 color);
+	void AddLightSource(glm::vec3 position, glm::vec3 target, glm::vec3 color);
 	void UseNormalShader();
 	void UseDepthShader();
 	void RenderShadows(std::vector<Entity>& entities);

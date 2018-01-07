@@ -8,18 +8,18 @@ Light::Light(Shader& shader, Shader& depthShader)
 	SendToShader();
 }
 
-void Light::AddLightSource(glm::vec3 lightPosition, glm::vec3 lightColor)
+void Light::AddLightSource(glm::vec3 lightPosition, glm::vec3 lightTarget, glm::vec3 lightColor)
 {
 	static GLint lastIndex = -1;
 
-	lightSources.push_back(PointLight{ lightPosition, lightColor, DepthMap(++lastIndex, shader, depthShader, lightPosition) });
+	lightSources.push_back(PointLight{ lightPosition, lightTarget, lightColor, DepthMap(++lastIndex, shader, depthShader, lightPosition) });
 }
 
-void Light::RenderDepthMaps(glm::vec3 cameraTarget, std::vector<Entity>& entities, Graphics& graphics)
+void Light::RenderDepthMaps(std::vector<Entity>& entities, Graphics& graphics)
 {
 	for (PointLight& l : lightSources)
 	{
-		l.ShadowMap.Render(cameraTarget, entities, graphics);
+		l.ShadowMap.Render(l.Target, entities, graphics);
 	}
 }
 

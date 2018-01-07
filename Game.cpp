@@ -132,5 +132,6 @@ void Game::CreateRoom(glm::vec3 pos)
 		AddEntity(toilet);
 	}
 
-	graphics.AddLightSource(glm::vec3((drand48() - 0.5) * 25, 1.0f, (drand48() - 0.5) * 25) + pos, glm::vec3(drand48(), drand48(), drand48()));
+	graphics.AddLightSource(pos + glm::vec3(-14.0f, 7.0f, 0.0f), pos + glm::vec3(14.0f, 0.0f, 0.0f), glm::vec3(drand48(), drand48(), drand48()));
+	//graphics.AddLightSource(glm::vec3((drand48() - 0.5) * 25, 10.0f, (drand48() - 0.5) * 25) + pos, glm::vec3(drand48(), drand48(), drand48()));
 }
