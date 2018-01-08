@@ -145,12 +145,13 @@ void Game::CreateRoom(glm::vec3 pos)
 
 	int numberOfToilets = rand() % 3 + 1;
 	int numberOfHanddryers = rand() % 3 + 1;
+	int numberOfSinks = rand() % 1 + 1;
 
 	for (int i = 0; i < numberOfToilets; ++i)
 	{
 		int xPositive = rand() % 2;
-		float xWall = (xPositive ? 1.0f : -1.0f) * 13.0f;
-		float zWall = ((rand() % 2) ? 1.0f : -1.0f) * (13.0f - drand48() * 5.0f);
+		float xWall = (xPositive ? 1.0f : -1.0f) * 14.0f;
+		float zWall = ((rand() % 2) ? 1.0f : -1.0f) * (14.0f - drand48() * 5.0f);
 		float zRotation = 0.0f;
 
 		if (xPositive)
@@ -200,7 +201,32 @@ void Game::CreateRoom(glm::vec3 pos)
 		AddEntity(handdryer);
 	}
 
-	
+	for (int i = 0; i < numberOfSinks; ++i)
+	{
+		int xPositive = rand() % 2;
+		float xWall = (xPositive ? 1.0f : -1.0f) * 14.0f;
+		float zWall = ((rand() % 2) ? 1.0f : -1.0f) * (14.0f - drand48() * 5.0f);
+		float yRotation = glm::radians(90.0f);
+
+		if (xPositive)
+		{
+			yRotation += glm::radians(180.0f);
+		}
+
+		if (rand() % 2 == 0)
+		{
+			float temp = xWall;
+			xWall = zWall;
+			zWall = temp;
+			yRotation -= glm::radians(90.0f);
+		}
+
+		Entity sink(models["sink"], roomId);
+		sink.SetPosition(pos + glm::vec3(xWall, 1.0f, zWall));
+		sink.SetRotation(glm::vec3(0.0f, yRotation, 0.0f));
+		sink.SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
+		AddEntity(sink);
+	}
 
 	float r, g, b;
 	int c = rand() % 3;
