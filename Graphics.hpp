@@ -23,6 +23,7 @@ public:
 	void AddLightSource(glm::vec3 position, glm::vec3 target, glm::vec3 color);
 	void UseNormalShader();
 	void UseDepthShader();
+	void ToggleLightViewMode();
 	void RenderShadows(std::vector<Entity>& entities);
 
 private:
@@ -35,5 +36,7 @@ private:
 	GLuint viewLoc;
 	GLuint modelLoc;
 	GLuint normalMatrixLoc;
+	GLboolean lightViewMode;
+	glm::mat4 projection;
 
 };

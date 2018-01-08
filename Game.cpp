@@ -8,8 +8,23 @@
 
 void Game::Run()
 {
+	GLboolean wasLPressed = GL_FALSE;
+
 	while (!window.ShouldClose())
 	{
+		if (Input::IsKeyPressed(GLFW_KEY_L))
+		{
+			if (wasLPressed == GL_FALSE)
+			{
+				graphics.ToggleLightViewMode();
+			}
+			wasLPressed = GL_TRUE;
+		}
+		else
+		{
+			wasLPressed = GL_FALSE;
+		}
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		UpdateEntities();
 		graphics.RenderShadows(entities);

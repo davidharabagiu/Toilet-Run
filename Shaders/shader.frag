@@ -60,7 +60,12 @@ vec3 CalcPointLight(vec4 lightPosEye, vec4 fragPosLightSpace, sampler2D shadowMa
 	float distance = length(lightPosEye.xyz - fragPosEye.xyz);
 	float att = 1.0f / (constant + linear * distance + quadratic * distance * distance);
 
-	float shadow = ShadowCalculation(fragPosLightSpace, shadowMap);
+	float shadow = 0.0f;
+
+	if (att >= 0.25f)
+	{
+		shadow = ShadowCalculation(fragPosLightSpace, shadowMap);
+	}
 	
 	return (ambient + (1.0 - shadow) * (diffuse + specular)) * att;
 }

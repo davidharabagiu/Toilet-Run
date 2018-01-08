@@ -12,24 +12,32 @@ Graphics::Graphics(int windowWidth, int windowHeight) :
 	projectionLoc = glGetUniformLocation(shader.GetShaderProgram(), "projection");
 	normalMatrixLoc = glGetUniformLocation(shader.GetShaderProgram(), "normalMatrix");
 	
-	glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)windowWidth / (float)windowHeight, 0.1f, 1000.0f);
+	projection = glm::perspective(glm::radians(45.0f), (float)windowWidth / (float)windowHeight, 0.1f, 1000.0f);
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 	glEnable(GL_CULL_FACE);
+
+	lightViewMode = GL_FALSE;
 }
 
 void Graphics::SetCameraPosition(glm::vec3 position)
 {
 	camera.SetPosition(position);
-	glm::mat4 view = camera.getViewMatrix();
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	if (lightViewMode == GL_FALSE)
+	{
+		glm::mat4 view = camera.getViewMatrix();
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	}
 }
 
 void Graphics::SetCameraRotation(GLfloat xRotation, GLfloat yRotation)
 {
 	camera.SetRotation(xRotation, yRotation);
-	glm::mat4 view = camera.getViewMatrix();
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	if (lightViewMode == GL_FALSE)
+	{
+		glm::mat4 view = camera.getViewMatrix();
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	}
 }
 
 void Graphics::Draw(gps::Model3D model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -65,4 +73,22 @@ void Graphics::UseDepthShader()
 void Graphics::RenderShadows(std::vector<Entity>& entities)
 {
 	light.RenderDepthMaps(entities, *this);
+}
+
+void Graphics::ToggleLightViewMode()
+{
+	lightViewMode = !lightViewMode;
+
+	if (lightViewMode == GL_TRUE)
+	{
+		glm::mat4 lightProjection = glm::ortho(-14.9f, 14.9f, -14.9f, 14.9f, 1.0f, 10.0f);
+		glm::mat4 lightView = glm::lookAt(glm::vec3(0.0f, 9.0f, 0.0f), glm::vec3(0.01f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(lightProjection));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(lightView));
+	}
+	else
+	{
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
+	}
 }
