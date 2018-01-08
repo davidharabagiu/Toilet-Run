@@ -69,6 +69,30 @@ void Player::Update(double deltaTime)
 	lastypos = Input::GetCursorY();
 }
 
+float Player::BobbingMagnitudeFn(float x)
+{
+	static const float alpha = 0.75f;
+	static const float pi = 3.14;
+
+	// bring x to [0, 1)
+	if (x >= 1.0f || x < 0)
+	{
+		x -= (int)x;
+	}
+
+	// ascending
+	if (x < alpha)
+	{
+		return x / alpha;
+	}
+
+	// descending
+	else
+	{
+		return (glm::sin((pi / (alpha - 1)) * x - pi / 2 - pi / (alpha - 1)) + 1) / 2;
+	}
+}
+
 void Player::Move(MOVE_DIRECTION direction, float speed)
 {
 	if (direction == MOVE_FORWARD)
@@ -93,7 +117,7 @@ void Player::Move(MOVE_DIRECTION direction, float speed)
 	}
 
 	distanceWalked += speed;
-	GLfloat bobbingDeltaY = glm::sin(distanceWalked * 1.5f) / 10.0f;
+	GLfloat bobbingDeltaY = BobbingMagnitudeFn(distanceWalked * 0.75f);
 
 	graphics.SetCameraPosition(position + glm::vec3(0.0f, bobbingDeltaY, 0.0f));
 }

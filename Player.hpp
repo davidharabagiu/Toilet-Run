@@ -23,5 +23,6 @@ private:
 	GLfloat distanceWalked;
 	void Move(MOVE_DIRECTION direction, float speed);
 	void Rotate(float pitch, float yaw);
+	float BobbingMagnitudeFn(float x);
 
 };
