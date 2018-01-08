@@ -17,9 +17,7 @@ public:
 	
 	Entity(gps::Model3D& model, GLint roomId);
 
-	virtual void Update()
-	{
-	}
+	void Update(float deltaTime);
 
 	void Draw(Graphics& g);
 	void Draw(Shader& s);
@@ -39,6 +37,16 @@ public:
 		return scale;
 	}
 
+	void SetVelocity(glm::vec3 velocity)
+	{
+		this->velocity = velocity;
+	}
+
+	void SetRotationSpeed(glm::vec3 rotationSpeed)
+	{
+		this->rotationSpeed = rotationSpeed;
+	}
+
 	glm::mat4 ModelMatrix();
 	void SetPosition(glm::vec3& NewPosition);
 	void SetRotation(glm::vec3& NewRotation);
@@ -51,5 +59,7 @@ private:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	GLint roomId;
+	glm::vec3 velocity;
+	glm::vec3 rotationSpeed;
 
 };

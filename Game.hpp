@@ -14,6 +14,7 @@
 #include <map>
 #include <string>
 #include <cstdlib>
+#include <memory>
 
 class Game
 {
@@ -32,6 +33,7 @@ public:
 		models["lamp"] = gps::Model3D("Objects/lamp/lamp.obj1", "Objects/lamp/");
 		models["handdryer"] = gps::Model3D("Objects/handdryer/handdryer.obj1", "Objects/handdryer/");
 		models["sink"] = gps::Model3D("Objects/sink/untitled.obj1", "Objects/sink/");
+		models["soap"] = gps::Model3D("Objects/soap/soap.obj1", "Objects/soap/");
 
 		for (int i = 0; i < 2; ++i)
 		{

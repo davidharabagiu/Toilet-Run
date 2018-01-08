@@ -53,7 +53,7 @@ void Game::UpdateEntities()
 
 	for (Entity& e : entities)
 	{
-		e.Update();
+		e.Update(deltaTime);
 	}
 
 	player.Update(deltaTime);
@@ -227,6 +227,23 @@ void Game::CreateRoom(glm::vec3 pos)
 		sink.SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 		AddEntity(sink);
 	}
+
+	int numberOfSoaps = rand() % 5 + 1;
+	for (int i = 0; i < numberOfSoaps; ++i)
+	{
+		float x = (drand48() - 0.5f) * 26;
+		float y = drand48() * 10;
+		float z = (drand48() - 0.5f) * 26;
+		Entity soap(models["soap"], roomId);
+		soap.SetPosition(pos + glm::vec3(x, y, z));
+		soap.SetRotation(glm::vec3(0.0f, glm::radians(45.0f), glm::radians(45.0f)));
+		soap.SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		soap.SetRotationSpeed(glm::vec3(0.0f, glm::radians(40.0f), 0.0f));
+		AddEntity(soap);
+	}
+
+	
+
 
 	float r, g, b;
 	int c = rand() % 3;

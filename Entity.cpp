@@ -13,6 +13,8 @@ Entity::Entity(gps::Model3D& model, GLint roomId)
 	SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	rotationSpeed = glm::vec3(0.0f);
+	velocity = glm::vec3(0.0f);
 }
 
 void Entity::Draw(Graphics& g)
@@ -49,4 +51,15 @@ glm::mat4 Entity::ModelMatrix()
 	tr = glm::rotate(tr, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
 	tr = glm::scale(tr, scale);
 	return tr;
+}
+
+void Entity::Update(float deltaTime)
+{
+	if (rotationSpeed.y != 0.0f)
+	{
+		int a = 1;
+	}
+	position += velocity * deltaTime;
+	rotation += rotationSpeed * deltaTime;
+	glm::vec3 cacat = rotationSpeed * deltaTime;
 }
