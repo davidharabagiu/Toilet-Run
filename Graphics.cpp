@@ -15,6 +15,9 @@ Graphics::Graphics(int windowWidth, int windowHeight) :
 	projection = glm::perspective(glm::radians(45.0f), (float)windowWidth / (float)windowHeight, 0.1f, 1000.0f);
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
+	glm::mat4 view = camera.getViewMatrix();
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
 	glEnable(GL_CULL_FACE);
 
 	lightViewMode = GL_FALSE;
