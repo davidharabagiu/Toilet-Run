@@ -121,6 +121,11 @@ void Game::CreateRoom(glm::vec3 pos)
 	roof.SetPosition(glm::vec3(0.0f, 10.0f, 0.0f) + pos);
 	AddEntity(roof);
 
+	Entity lamp(models["lamp"]);
+	lamp.SetScale(glm::vec3(0.05f, 0.05f, 0.05f));
+	lamp.SetPosition(glm::vec3(0.0, 10.1f, 0.0f) + pos);
+	AddEntity(lamp);
+
 	int numberOfToilets = rand() % 5 + 1;
 
 	for (int i = 0; i < numberOfToilets; ++i)
@@ -132,6 +137,27 @@ void Game::CreateRoom(glm::vec3 pos)
 		AddEntity(toilet);
 	}
 
-	graphics.AddLightSource(pos + glm::vec3(-14.0f, 7.0f, 0.0f), pos + glm::vec3(14.0f, 0.0f, 0.0f), glm::vec3(drand48(), drand48(), drand48()));
+	float r, g, b;
+	int c = rand() % 3;
+	if (c == 0)
+	{
+		r = drand48();
+		g = drand48();
+		b = drand48() * (2.0f - r - g);
+	}
+	else if (c == 1)
+	{
+		g = drand48();
+		r = drand48();
+		b = drand48() * (2.0f - g - r);
+	}
+	else if (c == 2)
+	{
+		b = drand48();
+		r = drand48();
+		g = drand48() * (2.0f - b - r);
+	}
+
+	graphics.AddLightSource(pos + glm::vec3(0.0f, 9.0f, 0.0f), pos + glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(r, g, b));
 	//graphics.AddLightSource(glm::vec3((drand48() - 0.5) * 25, 10.0f, (drand48() - 0.5) * 25) + pos, glm::vec3(drand48(), drand48(), drand48()));
 }

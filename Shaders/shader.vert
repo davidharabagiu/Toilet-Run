@@ -1,5 +1,5 @@
 #version 410 core
-#define MAX_POINT_LIGHTS 5
+#define MAX_POINT_LIGHTS 6
 
 layout(location=0) in vec3 vertexPosition;
 layout(location=1) in vec3 vertexNormal;

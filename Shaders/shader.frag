@@ -1,5 +1,5 @@
 #version 410 core
-#define MAX_POINT_LIGHTS 5
+#define MAX_POINT_LIGHTS 6
 
 struct PointLight
 {
@@ -18,23 +18,16 @@ uniform mat3 normalMatrix;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform int nrPointLights;
 uniform mat4 view;
+uniform bool shadowsOn = true;
 
 out vec4 fragmentColor;
 
 float ambientStrength = 0.4f;
 float specularStrength = 0.01f;
 float shininess = 0.5f;
-float constant = 1.0f;
-float linear = 0.00225f;
+float constant = 2.5f;
+float linear = 0.00425f;
 float quadratic = 0.00375f;
-
-float LinearizeDepth(float depth)
-{
-	float near_plane = 2.0f;
-	float far_plane = 50.0f;
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));
-}
 
 float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap)
 {
@@ -44,7 +37,7 @@ float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap)
 		return 0.0f;
 	}
 	projCoords = projCoords * 0.5f + 0.5f;
-	float closestDepth = LinearizeDepth(texture(shadowMap, projCoords.xy).r) / 50.0f;
+	float closestDepth = texture(shadowMap, projCoords.xy).r;
 	float currentDepth = projCoords.z;
 	float shadow = (currentDepth - 0.05f) > closestDepth ? 1.0f : 0.0f;
 
@@ -68,7 +61,7 @@ vec3 CalcPointLight(vec4 lightPosEye, vec4 fragPosLightSpace, sampler2D shadowMa
 	float att = 1.0f / (constant + linear * distance + quadratic * distance * distance);
 
 	float shadow = ShadowCalculation(fragPosLightSpace, shadowMap);
-
+	
 	return (ambient + (1.0 - shadow) * (diffuse + specular)) * att;
 }
 
