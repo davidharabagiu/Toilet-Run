@@ -75,5 +75,6 @@ private:
 	void UpdateEntities();
 	void RenderScene();
 	void SpawnShit(glm::vec3 pos);
+	void TogglePolygonMode();
 
 };

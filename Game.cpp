@@ -10,6 +10,7 @@ void Game::Run()
 {
 	GLboolean wasLPressed = GL_FALSE;
 	GLboolean wasKPressed = GL_FALSE;
+	GLboolean wasPPressed = GL_FALSE;
 
 	while (!window.ShouldClose())
 	{
@@ -37,6 +38,19 @@ void Game::Run()
 		else
 		{
 			wasKPressed = GL_FALSE;
+		}
+
+		if (Input::IsKeyPressed(GLFW_KEY_P))
+		{
+			if (wasPPressed == GL_FALSE)
+			{
+				TogglePolygonMode();
+			}
+			wasPPressed = GL_TRUE;
+		}
+		else
+		{
+			wasPPressed = GL_FALSE;
 		}
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -89,6 +103,25 @@ void Game::SpawnShit(glm::vec3 pos)
 	shit.SetVelocity(glm::vec3(0.0f, -3.0f, 0.0f));
 	shit.SetScale(glm::vec3(0.5f, 0.5f, 0.5f));
 	AddEntity(shit);
+}
+
+void Game::TogglePolygonMode()
+{
+	static int polygonMode = 0;
+	
+	polygonMode = (polygonMode + 1) % 3;
+	if (polygonMode == 0)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	else if (polygonMode == 1)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	else if (polygonMode == 2)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+	}
 }
 
 void Game::CreateRoom(glm::vec3 pos)
