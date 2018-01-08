@@ -34,6 +34,7 @@ public:
 		models["handdryer"] = gps::Model3D("Objects/handdryer/handdryer.obj1", "Objects/handdryer/");
 		models["sink"] = gps::Model3D("Objects/sink/untitled.obj1", "Objects/sink/");
 		models["soap"] = gps::Model3D("Objects/soap/soap.obj1", "Objects/soap/");
+		models["shit"] = gps::Model3D("Objects/shit/untitled.obj1", "Objects/shit/");
 
 		for (int i = 0; i < 2; ++i)
 		{
@@ -73,5 +74,6 @@ private:
 
 	void UpdateEntities();
 	void RenderScene();
+	void SpawnShit(glm::vec3 pos);
 
 };

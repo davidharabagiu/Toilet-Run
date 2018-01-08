@@ -9,6 +9,7 @@
 void Game::Run()
 {
 	GLboolean wasLPressed = GL_FALSE;
+	GLboolean wasKPressed = GL_FALSE;
 
 	while (!window.ShouldClose())
 	{
@@ -23,6 +24,19 @@ void Game::Run()
 		else
 		{
 			wasLPressed = GL_FALSE;
+		}
+
+		if (Input::IsKeyPressed(GLFW_KEY_K))
+		{
+			if (wasKPressed == GL_FALSE)
+			{
+				SpawnShit(player.Position());
+			}
+			wasKPressed = GL_TRUE;
+		}
+		else
+		{
+			wasKPressed = GL_FALSE;
 		}
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -54,6 +68,10 @@ void Game::UpdateEntities()
 	for (Entity& e : entities)
 	{
 		e.Update(deltaTime);
+		if (e.Position().y <= 0.1f)
+		{
+			e.SetVelocity(glm::vec3(0.0f));
+		}
 	}
 
 	player.Update(deltaTime);
@@ -62,6 +80,15 @@ void Game::UpdateEntities()
 static double drand48()
 {
 	return rand() / (RAND_MAX + 1.0);
+}
+
+void Game::SpawnShit(glm::vec3 pos)
+{
+	Entity shit(models["shit"], -1);
+	shit.SetPosition(pos);
+	shit.SetVelocity(glm::vec3(0.0f, -3.0f, 0.0f));
+	shit.SetScale(glm::vec3(0.5f, 0.5f, 0.5f));
+	AddEntity(shit);
 }
 
 void Game::CreateRoom(glm::vec3 pos)

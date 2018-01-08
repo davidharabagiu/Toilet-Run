@@ -14,6 +14,11 @@ public:
 	Player(Graphics& graphics);
 	void Update(double deltaTime);
 
+	glm::vec3 Position()
+	{
+		return position;
+	}
+
 private:
 
 	Graphics& graphics;
