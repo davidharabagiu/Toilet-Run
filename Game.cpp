@@ -179,11 +179,11 @@ void Game::CreateRoom(glm::vec3 pos)
 		int xPositive = rand() % 2;
 		float xWall = (xPositive ? 1.0f : -1.0f) * 14.0f;
 		float zWall = ((rand() % 2) ? 1.0f : -1.0f) * (14.0f - drand48() * 5.0f);
-		float zRotation = 0.0f;
+		float yRotation = glm::radians(90.0f);
 
 		if (xPositive)
 		{
-			zRotation = glm::radians(180.0f);
+			yRotation += glm::radians(180.0f);
 		}
 
 		if (rand() % 2 == 0)
@@ -191,12 +191,12 @@ void Game::CreateRoom(glm::vec3 pos)
 			float temp = xWall;
 			xWall = zWall;
 			zWall = temp;
-			zRotation -= glm::radians(90.0f);
+			yRotation -= glm::radians(90.0f);
 		}
 
 		Entity toilet(models["toilet"], roomId);
-		toilet.SetScale(glm::vec3(0.005f, 0.005f, 0.005f));
-		toilet.SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, zRotation));
+		toilet.SetScale(glm::vec3(0.05f, 0.05f, 0.05f));
+		toilet.SetRotation(glm::vec3(0.0f, yRotation, 0.0f));
 		toilet.SetPosition(glm::vec3(xWall, 0, zWall) + pos);
 		AddEntity(toilet);
 	}

@@ -29,14 +29,14 @@ public:
 	{
 		models["floor"] = gps::Model3D("Objects/floor/floor.obj1", "Objects/floor/");
 		models["wall"] = gps::Model3D("Objects/wall/wall.obj1", "Objects/wall/");
-		models["toilet"] = gps::Model3D("Objects/toilet/toilet.obj1", "Objects/toilet/");
+		models["toilet"] = gps::Model3D("Objects/toilet/m4d_v2_001.obj1", "Objects/toilet/");
 		models["lamp"] = gps::Model3D("Objects/lamp/lamp.obj1", "Objects/lamp/");
 		models["handdryer"] = gps::Model3D("Objects/handdryer/handdryer.obj1", "Objects/handdryer/");
 		models["sink"] = gps::Model3D("Objects/sink/untitled.obj1", "Objects/sink/");
 		models["soap"] = gps::Model3D("Objects/soap/soap.obj1", "Objects/soap/");
 		models["shit"] = gps::Model3D("Objects/shit/untitled.obj1", "Objects/shit/");
 
-		for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < 1; ++i)
 		{
 			for (int j = 0; j < 3; ++j)
 			{

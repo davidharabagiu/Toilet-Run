@@ -39,7 +39,7 @@ void Player::Update(double deltaTime)
 
 	if (movingLeft || movingRight || movingBackward || movingForward)
 	{
-		distanceWalked += SPEED;
+		distanceWalked += SPEED * deltaTime;
 	}
 
 	float speed = SPEED;
@@ -130,7 +130,7 @@ void Player::Move(MOVE_DIRECTION direction, float speed)
 		position.x -= glm::cos(rotationY) * speed;
 	}
 
-	GLfloat bobbingDeltaY = BobbingMagnitudeFn(distanceWalked * 0.005f) * 0.7f;
+	GLfloat bobbingDeltaY = BobbingMagnitudeFn(distanceWalked * 0.25f) * 0.7f;
 
 	graphics.SetCameraPosition(position + glm::vec3(0.0f, bobbingDeltaY, 0.0f));
 }
