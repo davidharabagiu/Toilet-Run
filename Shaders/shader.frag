@@ -19,6 +19,7 @@ uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform int nrPointLights;
 uniform mat4 view;
 uniform bool shadowsOn = true;
+uniform int roomId;
 
 out vec4 fragmentColor;
 
@@ -44,7 +45,7 @@ float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap)
 	return shadow;
 }
 
-vec3 CalcPointLight(vec4 lightPosEye, vec4 fragPosLightSpace, sampler2D shadowMap, vec3 color)
+vec3 CalcPointLight(vec4 lightPosEye, vec4 fragPosLightSpace, sampler2D shadowMap, vec3 color, int id)
 {
 	vec3 cameraPosEye = vec3(0.0f);
 	vec3 normalEye = normalize(normalMatrix * normal);
@@ -62,7 +63,7 @@ vec3 CalcPointLight(vec4 lightPosEye, vec4 fragPosLightSpace, sampler2D shadowMa
 
 	float shadow = 0.0f;
 
-	if (att >= 0.25f)
+	if (id == roomId)
 	{
 		shadow = ShadowCalculation(fragPosLightSpace, shadowMap);
 	}
@@ -78,7 +79,7 @@ void main()
 	for (int i = 0; i < nrPointLights; i++)
 	{
 		vec4 lightPosEye = view * vec4(pointLights[i].position, 1.0f);
-		totalLight += CalcPointLight(lightPosEye, fragPosLightSpaces[i], shadowMaps[i], pointLights[i].color);
+		totalLight += CalcPointLight(lightPosEye, fragPosLightSpaces[i], shadowMaps[i], pointLights[i].color, i);
 	}
 
     fragmentColor = min(diffuseColor * vec4(totalLight, 1.0f), 1.0f);

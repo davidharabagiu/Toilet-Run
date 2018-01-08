@@ -8,11 +8,9 @@ Light::Light(Shader& shader, Shader& depthShader)
 	SendToShader();
 }
 
-void Light::AddLightSource(glm::vec3 lightPosition, glm::vec3 lightTarget, glm::vec3 lightColor)
+void Light::AddLightSource(glm::vec3 lightPosition, glm::vec3 lightTarget, glm::vec3 lightColor, GLint id)
 {
-	static GLint lastIndex = -1;
-
-	lightSources.push_back(PointLight{ lightPosition, lightTarget, lightColor, DepthMap(++lastIndex, shader, depthShader, lightPosition) });
+	lightSources.push_back(PointLight{ lightPosition, lightTarget, lightColor, DepthMap(id, shader, depthShader, lightPosition) });
 }
 
 void Light::RenderDepthMaps(std::vector<Entity>& entities, Graphics& graphics)

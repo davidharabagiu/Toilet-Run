@@ -7,8 +7,8 @@
 #include "Entity.hpp"
 #include "Graphics.hpp"
 
-Entity::Entity(gps::Model3D& model)
-	: model {model}
+Entity::Entity(gps::Model3D& model, GLint roomId)
+	: model {model}, roomId {roomId}
 {
 	SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -17,7 +17,7 @@ Entity::Entity(gps::Model3D& model)
 
 void Entity::Draw(Graphics& g)
 {
-	g.Draw(model, position, rotation, scale);
+	g.Draw(model, position, rotation, scale, roomId);
 }
 
 void Entity::Draw(Shader& s)

@@ -30,6 +30,7 @@ public:
 		models["wall"] = gps::Model3D("Objects/wall/wall.obj1", "Objects/wall/");
 		models["toilet"] = gps::Model3D("Objects/toilet/toilet.obj1", "Objects/toilet/");
 		models["lamp"] = gps::Model3D("Objects/lamp/lamp.obj1", "Objects/lamp/");
+		models["handdryer"] = gps::Model3D("Objects/handdryer/handdryer.obj1", "Objects/handdryer/");
 
 		for (int i = 0; i < 2; ++i)
 		{

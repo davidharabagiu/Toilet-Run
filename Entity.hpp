@@ -15,7 +15,7 @@ class Entity
 
 public:
 	
-	Entity(gps::Model3D& model);
+	Entity(gps::Model3D& model, GLint roomId);
 
 	virtual void Update()
 	{
@@ -50,5 +50,6 @@ private:
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+	GLint roomId;
 
 };

@@ -25,7 +25,7 @@ class Light
 public:
 
 	Light(Shader& shader, Shader& depthShader);
-	void AddLightSource(glm::vec3 lightPosition, glm::vec3 lightTarget, glm::vec3 lightColor);
+	void AddLightSource(glm::vec3 lightPosition, glm::vec3 lightTarget, glm::vec3 lightColor, GLint id);
 	void SendToShader();
 	void RenderDepthMaps(std::vector<Entity>& entities, Graphics& graphics);
 
