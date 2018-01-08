@@ -37,21 +37,35 @@ void Player::Update(double deltaTime)
 		movingRight = true;
 	}
 
+	if (movingLeft || movingRight || movingBackward || movingForward)
+	{
+		distanceWalked += SPEED;
+	}
+
+	float speed = SPEED;
+
+	// when moving diagonally, we need to maintain the same speed
+	// 1.41 = sqrt(2)
+	if ((movingLeft || movingRight) && (movingForward || movingBackward))
+	{
+		speed /= 1.41f;
+	}
+
 	if (movingForward)
 	{
-		Move(MOVE_FORWARD, SPEED * deltaTime);
+		Move(MOVE_FORWARD, speed * deltaTime);
 	}
 	if (movingBackward)
 	{
-		Move(MOVE_BACKWARD, SPEED * deltaTime);
+		Move(MOVE_BACKWARD, speed * deltaTime);
 	}
 	if (movingLeft)
 	{
-		Move(MOVE_LEFT, SPEED * deltaTime);
+		Move(MOVE_LEFT, speed * deltaTime);
 	}
 	if (movingRight)
 	{
-		Move(MOVE_RIGHT, SPEED * deltaTime);
+		Move(MOVE_RIGHT, speed * deltaTime);
 	}
 
 	static double lastxpos = -1;
@@ -116,8 +130,7 @@ void Player::Move(MOVE_DIRECTION direction, float speed)
 		position.x -= glm::cos(rotationY) * speed;
 	}
 
-	distanceWalked += speed;
-	GLfloat bobbingDeltaY = BobbingMagnitudeFn(distanceWalked * 0.75f);
+	GLfloat bobbingDeltaY = BobbingMagnitudeFn(distanceWalked * 0.005f) * 0.7f;
 
 	graphics.SetCameraPosition(position + glm::vec3(0.0f, bobbingDeltaY, 0.0f));
 }
