@@ -36,6 +36,8 @@ public:
 		models["soap"] = gps::Model3D("Objects/soap/soap.obj1", "Objects/soap/");
 		models["shit"] = gps::Model3D("Objects/shit/untitled.obj1", "Objects/shit/");
 
+		graphics.SetSkybox("Skybox/");
+
 		for (int i = 0; i < 2; ++i)
 		{
 			for (int j = 0; j < 3; ++j)

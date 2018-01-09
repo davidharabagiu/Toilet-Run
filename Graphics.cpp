@@ -3,7 +3,9 @@
 Graphics::Graphics(int windowWidth, int windowHeight) :
 	shader("shaders/shader.vert", "shaders/shader.frag"),
 	depthShader("shaders/depthShader.vert", "shaders/depthShader.frag"),
-	light(shader, depthShader)
+	skyboxShader("shaders/skyboxShader.vert", "shaders/skyboxShader.frag"),
+	light(shader, depthShader),
+	skyBox(nullptr)
 {
 	shader.UseShaderProgram();
 
@@ -97,4 +99,32 @@ void Graphics::ToggleLightViewMode()
 		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
 	}
+}
+
+void Graphics::SetSkybox(std::string path)
+{
+	std::vector<std::string> faces;
+	faces.push_back(path + "right.tga");
+	faces.push_back(path + "left.tga");
+	faces.push_back(path + "top.tga");
+	faces.push_back(path + "bottom.tga");
+	faces.push_back(path + "back.tga");
+	faces.push_back(path + "front.tga");
+
+	if (skyBox != nullptr)
+	{
+		delete skyBox;
+	}
+	skyBox = new gps::SkyBox();
+	skyBox->Load(faces);
+}
+
+void Graphics::DrawSkybox()
+{
+	if (skyBox == nullptr)
+	{
+		return;
+	}
+
+	skyBox->Draw(skyboxShader, camera.getViewMatrix(), projection);
 }

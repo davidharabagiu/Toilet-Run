@@ -57,6 +57,7 @@ void Game::Run()
 		UpdateEntities();
 		graphics.RenderShadows(entities);
 		glViewport(0, 0, this->window.Width(), this->window.Height());
+		graphics.DrawSkybox();
 		RenderScene();
 		window.Update();
 	}

@@ -8,6 +8,7 @@
 #include "Light.hpp"
 #include "Camera.hpp"
 #include "Model3D.hpp"
+#include "SkyBox.hpp"
 
 class Entity;
 
@@ -25,11 +26,22 @@ public:
 	void UseDepthShader();
 	void ToggleLightViewMode();
 	void RenderShadows(std::vector<Entity>& entities);
+	void SetSkybox(std::string path);
+	void DrawSkybox();
+
+	~Graphics()
+	{
+		if (skyBox != nullptr)
+		{
+			delete skyBox;
+		}
+	}
 
 private:
 
 	Shader shader;
 	Shader depthShader;
+	Shader skyboxShader;
 	Light light;
 	gps::Camera camera;
 	GLuint projectionLoc;
@@ -39,5 +51,6 @@ private:
 	GLboolean lightViewMode;
 	glm::mat4 projection;
 	GLuint roomIdLoc;
+	gps::SkyBox* skyBox;
 
 };
