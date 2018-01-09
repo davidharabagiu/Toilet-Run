@@ -14,7 +14,7 @@ class Entity
 {
 
 public:
-	
+
 	Entity(gps::Model3D& model, GLint roomId);
 
 	void Update(float deltaTime);
@@ -45,6 +45,11 @@ public:
 	void SetRotationSpeed(glm::vec3 rotationSpeed)
 	{
 		this->rotationSpeed = rotationSpeed;
+	}
+
+	GLint RoomId()
+	{
+		return roomId;
 	}
 
 	glm::mat4 ModelMatrix();

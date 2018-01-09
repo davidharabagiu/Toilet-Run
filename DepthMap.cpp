@@ -48,8 +48,11 @@ void DepthMap::Render(glm::vec3 lightTarget, std::vector<Entity>& entities, Grap
 
 	for (Entity e : entities)
 	{
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(e.ModelMatrix()));
-		e.Draw(depthShader);
+		if (e.RoomId() == index)
+		{
+			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(e.ModelMatrix()));
+			e.Draw(depthShader);
+		}
 	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
