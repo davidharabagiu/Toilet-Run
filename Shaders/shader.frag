@@ -1,5 +1,5 @@
 #version 410 core
-#define MAX_POINT_LIGHTS 6
+#define MAX_POINT_LIGHTS 9
 
 struct PointLight
 {
