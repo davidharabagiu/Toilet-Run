@@ -11,12 +11,17 @@ class Player
 
 public:
 
-	Player(Graphics& graphics);
+	Player(Graphics& graphics, float minX, float maxX, float minZ, float maxZ);
 	void Update(double deltaTime);
 
 	glm::vec3 Position()
 	{
 		return position;
+	}
+
+	bool IsDead()
+	{
+		return dead;
 	}
 
 private:
@@ -29,5 +34,10 @@ private:
 	void Move(MOVE_DIRECTION direction, float speed);
 	void Rotate(float pitch, float yaw);
 	float BobbingMagnitudeFn(float x);
+	float minX;
+	float maxX;
+	float minZ;
+	float maxZ;
+	bool dead;
 
 };

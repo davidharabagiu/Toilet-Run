@@ -25,7 +25,7 @@ public:
 		:
 		window(WindowWidth, WindowHeight, WindowTitle),
 		graphics(WindowWidth, WindowHeight),
-		player(graphics)
+		player(graphics, -15.0f, ROOMS_X * 30.0f - 15, -15.0f, ROOMS_Z * 30.0f - 15)
 	{
 		models["floor"] = gps::Model3D("Objects/floor/floor.obj1", "Objects/floor/");
 		models["wall"] = gps::Model3D("Objects/wall/wall.obj1", "Objects/wall/");
@@ -38,9 +38,9 @@ public:
 
 		graphics.SetSkybox("Skybox/");
 
-		for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < ROOMS_X; ++i)
 		{
-			for (int j = 0; j < 3; ++j)
+			for (int j = 0; j < ROOMS_Z; ++j)
 			{
 				CreateRoom(glm::vec3(30.0f * i, 0.0f, 30.0f * j));
 			}
@@ -67,6 +67,9 @@ public:
 	void CreateRoom(glm::vec3 pos);
 
 private:
+
+	const int ROOMS_X = 3;
+	const int ROOMS_Z = 2;
 
 	Window window;
 	Graphics graphics;

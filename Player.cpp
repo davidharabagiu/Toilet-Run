@@ -2,8 +2,8 @@
 #include "Input.hpp"
 #include "Graphics.hpp"
 
-Player::Player(Graphics& graphics)
-	: graphics {graphics}
+Player::Player(Graphics& graphics, float minX, float maxX, float minZ, float maxZ)
+	: graphics {graphics}, minX {minX}, maxX {maxX}, minZ {minZ}, maxZ {maxZ}, dead {false}
 {
 	this->position = glm::vec3(0, 4.0f, 0);
 	this->rotationX = 0;
@@ -66,6 +66,19 @@ void Player::Update(double deltaTime)
 	if (movingRight)
 	{
 		Move(MOVE_RIGHT, speed * deltaTime);
+	}
+
+	if (position.x < minX || position.x > maxX ||
+		position.z < minZ || position.z > maxZ ||
+		position.y < 0.0f)
+	{
+		position.y -= 10.0f * deltaTime;
+		graphics.SetCameraPosition(position);
+	}
+
+	if (position.y < -50.0f)
+	{
+		dead = true;
 	}
 
 	static double lastxpos = -1;
