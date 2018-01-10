@@ -305,14 +305,11 @@ void Game::CreateRoom(glm::vec3 pos)
 		float z = (drand48() - 0.5f) * 26;
 		Entity soap(models["soap"], roomId);
 		soap.SetPosition(pos + glm::vec3(x, y, z));
-		soap.SetRotation(glm::vec3(0.0f, glm::radians(45.0f), glm::radians(45.0f)));
+		soap.SetRotation(glm::vec3(0.0f, glm::radians(45.0f), glm::radians(drand48() * 70.0f + 10.0f)));
 		soap.SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
-		soap.SetRotationSpeed(glm::vec3(0.0f, glm::radians(40.0f), 0.0f));
+		soap.SetRotationSpeed(glm::vec3(0.0f, glm::radians(drand48() * 40.0f + 20.0f), 0.0f));
 		AddEntity(soap);
 	}
-
-	
-
 
 	float r, g, b;
 	int c = rand() % 3;
